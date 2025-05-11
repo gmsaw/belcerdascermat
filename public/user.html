@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User - Sistem Bel Cerdas Cermat</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Sistem Bel Cerdas Cermat</h1>
+        <div class="user-form">
+            <input type="text" id="userName" placeholder="Masukkan nama Anda">
+            <button id="registerUser">Daftar</button>
+        </div>
+        <div class="response-box" id="responseSection" style="display: none;">
+            <p>Sesi saat ini: <span id="userSessionStatus">Tidak Aktif</span></p>
+            <p>Tekan <strong>SPACE</strong> untuk menjawab ketika sesi aktif</p>
+            <div id="responseResult"></div>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

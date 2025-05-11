@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Sistem Bel Cerdas Cermat</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Panel Admin</h1>
+        <div class="status-box">
+            <p>Status Sesi: <span id="sessionStatus">Tidak Aktif</span></p>
+            <button id="toggleSession">Mulai Sesi</button>
+            <button id="resetSystem">Reset Sistem</button>
+        </div>
+        <div class="responder-box">
+            <h2>Responder Tercepat</h2>
+            <div id="fastestResponderDisplay">
+                <p>Belum ada yang menjawab</p>
+            </div>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
