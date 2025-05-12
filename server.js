@@ -7,20 +7,20 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-// Sediakan file statis dari folder public
 app.use(express.static(path.join(__dirname, 'public')));
 
 // State aplikasi
 let sessionActive = false;
 let users = {};
+let connectedUsers = {};
 let fastestResponder = null;
 
-// Socket.io connection
 io.on('connection', (socket) => {
     console.log('New client connected:', socket.id);
 
-    // Kirim status sesi saat pertama kali terhubung
+    // Kirim status sesi dan daftar user saat pertama kali terhubung
     socket.emit('sessionStatus', sessionActive);
+    socket.emit('userListUpdated', Object.values(connectedUsers));
     
     // Admin mengaktifkan/menonaktifkan sesi
     socket.on('toggleSession', (isActive) => {
@@ -35,39 +35,52 @@ io.on('connection', (socket) => {
         console.log(`Session ${sessionActive ? 'started' : 'stopped'}`);
     });
     
+    // User register
+    socket.on('registerUser', (userName) => {
+        connectedUsers[socket.id] = userName;
+        io.emit('userListUpdated', Object.values(connectedUsers));
+        console.log(`User registered: ${userName}`);
+    });
+    
     // User menekan tombol jawab
-socket.on('userRespond', (userData) => {
-    console.log(`Respon diterima dari: ${userData.name} (${socket.id})`);
-    
-    if (!sessionActive) {
-        console.log('Sesi tidak aktif, abaikan respon');
-        return;
-    }
-    
-    if (fastestResponder) {
-        console.log('Sudah ada responder tercepat, abaikan');
-        return;
-    }
-    
-    const responseTime = Date.now();
-    users[socket.id] = {
-        name: userData.name,
-        responseTime: responseTime
-    };
-    
-    console.log(`User ${userData.name} merespon pada: ${responseTime}`);
-    
-    // Cari user tercepat
-    const responders = Object.values(users);
-    if (responders.length > 0) {
-        fastestResponder = responders.reduce((fastest, current) => 
-            current.responseTime < fastest.responseTime ? current : fastest
-        );
+    socket.on('userRespond', (userData) => {
+        if (!sessionActive || fastestResponder) return;
         
-        console.log(`Responder tercepat: ${fastestResponder.name} pada ${fastestResponder.responseTime}`);
-        io.emit('fastestResponder', fastestResponder);
-    }
-});
+        const responseTime = Date.now();
+        users[socket.id] = {
+            name: userData.name,
+            responseTime: responseTime
+        };
+        
+        // Cari user tercepat
+        const responders = Object.values(users);
+        if (responders.length > 0) {
+            fastestResponder = responders.reduce((fastest, current) => 
+                current.responseTime < fastest.responseTime ? current : fastest
+            );
+            
+            io.emit('fastestResponder', fastestResponder);
+            console.log('Fastest responder:', fastestResponder.name);
+        }
+    });
+    
+    // Reset sistem
+    socket.on('resetSystem', () => {
+        sessionActive = false;
+        users = {};
+        fastestResponder = null;
+        io.emit('sessionStatus', sessionActive);
+        io.emit('systemReset');
+        console.log('System has been reset');
+    });
+    
+    // Handle disconnect
+    socket.on('disconnect', () => {
+        console.log('Client disconnected:', socket.id);
+        delete users[socket.id];
+        delete connectedUsers[socket.id];
+        io.emit('userListUpdated', Object.values(connectedUsers));
+    });
 });
 
 const PORT = process.env.PORT || 3000;

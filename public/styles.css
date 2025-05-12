@@ -92,3 +92,38 @@ button:hover {
     color: #e74c3c;
     font-weight: bold;
 }
+
+/* Tambahkan ini ke bagian akhir file CSS */
+.user-list-box {
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#userList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#userList li {
+    background-color: white;
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+}
+
+#answerButton {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #2ecc71;
+    margin-top: 15px;
+}
+
+#answerButton:hover {
+    background-color: #27ae60;
+}
