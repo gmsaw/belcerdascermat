@@ -10,8 +10,13 @@ if (document.querySelector('#toggleSession')) {
     // Update daftar user
     socket.on('userListUpdated', (users) => {
         userListElement.innerHTML = users.length > 0 
-            ? users.map(user => `<li>${user}</li>`).join('')
-            : '<li>Tidak ada peserta</li>';
+            ? users.map(user => `
+                <li class="flex items-center py-2 px-3 bg-gray-50 rounded hover:bg-gray-100 transition">
+                    <span class="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+                    ${user}
+                </li>
+            `).join('')
+            : '<li class="text-gray-500 italic py-2">Tidak ada peserta</li>';
     });
 
     // Update UI berdasarkan status sesi
@@ -29,8 +34,10 @@ if (document.querySelector('#toggleSession')) {
     // Tampilkan responder tercepat
     socket.on('fastestResponder', (responder) => {
         fastestResponderDisplay.innerHTML = `
-            <p><strong>${responder.name}</strong></p>
-            <p>Merespon paling cepat!</p>
+            <div class="animate-pulse">
+                <p class="font-bold text-lg text-yellow-700">${responder.name}</p>
+                <p class="text-yellow-600">Merespon paling cepat!</p>
+            </div>
         `;
     });
 
@@ -106,10 +113,21 @@ if (document.querySelector('#userName')) {
             return;
         }
         
+        // Animasi tombol
+        answerButton.classList.add('animate-bounce');
+        setTimeout(() => {
+            answerButton.classList.remove('animate-bounce');
+        }, 1000);
+        
         socket.emit('userRespond', { name: userName });
         
-        responseResult.style.display = 'block';
-        responseResult.textContent = 'Jawaban Anda telah direkam!';
+        responseResult.classList.remove('hidden');
+        responseResult.classList.add('animate-fade-in');
+        
+        // Reset animasi setelah 3 detik
+        setTimeout(() => {
+            responseResult.classList.remove('animate-fade-in');
+        }, 3000);
     }
 
     // Reset tampilan user ketika sistem direset

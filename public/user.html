@@ -4,22 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User - Sistem Bel Cerdas Cermat</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="/styles.css" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
-        <h1>Sistem Bel Cerdas Cermat</h1>
-        <div class="user-form">
-            <input type="text" id="userName" placeholder="Masukkan nama Anda">
-            <button id="registerUser">Daftar</button>
-        </div>
-        <div class="response-box" id="responseSection" style="display: none;">
-            <p>Sesi saat ini: <span id="userSessionStatus">Tidak Aktif</span></p>
-            <p>Tekan <strong>SPACE</strong> atau tombol di bawah untuk menjawab ketika sesi aktif</p>
-            <button id="answerButton">JAWAB</button>
-            <div id="responseResult"></div>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 max-w-md mx-auto">
+            <h1 class="text-3xl font-bold text-center text-indigo-700 mb-6">Sistem Bel Cerdas Cermat</h1>
+            
+            <!-- Form Registrasi -->
+            <div id="registrationSection" class="mb-8">
+                <div class="flex space-x-2 mb-4">
+                    <input type="text" id="userName" placeholder="Masukkan nama Anda" 
+                        class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <button id="registerUser" 
+                        class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition">
+                        Daftar
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Response Section -->
+            <div id="responseSection" class="hidden">
+                <div class="bg-indigo-50 rounded-lg p-4 mb-6">
+                    <p class="text-gray-600">Sesi saat ini: 
+                        <span id="userSessionStatus" class="font-semibold">Tidak Aktif</span>
+                    </p>
+                </div>
+                
+                <div class="text-center mb-6">
+                    <p class="text-gray-600 mb-3">Tekan <span class="font-bold bg-gray-200 px-2 py-1 rounded">SPACE</span> atau tombol di bawah untuk menjawab</p>
+                    <button id="answerButton" 
+                        class="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg font-bold text-lg transition transform hover:scale-105">
+                        TEKAN UNTUK JAWAB
+                    </button>
+                </div>
+                
+                <div id="responseResult" class="hidden bg-green-100 border-l-4 border-green-500 p-4 rounded-lg">
+                    <p class="text-green-800 font-medium">Jawaban Anda telah direkam!</p>
+                </div>
+            </div>
         </div>
     </div>
+    
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js"></script>
 </body>
