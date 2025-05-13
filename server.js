@@ -83,7 +83,20 @@ io.on('connection', (socket) => {
     });
 });
 
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+const PORT = 3000;
+
+server.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on http://${getLocalIpAddress()}:${PORT}`);
 });
+
+function getLocalIpAddress() {
+    const interfaces = require('os').networkInterfaces();
+    for (const name in interfaces) {
+        for (const iface of interfaces[name]) {
+            if (iface.family === 'IPv4' && !iface.internal) {
+                return iface.address;
+            }
+        }
+    }
+    return 'localhost';
+}
