@@ -84,6 +84,7 @@ if (document.querySelector('#userName')) {
             registerUserBtn.disabled = true;
             responseSection.style.display = 'block';
             socket.emit('registerUser', userName);
+            document.getElementById("registrationSection").classList.add("hidden");
         }
     });
 
@@ -91,6 +92,7 @@ if (document.querySelector('#userName')) {
     socket.on('sessionStatus', (isActive) => {
         userSessionStatus.textContent = isActive ? 'Aktif' : 'Tidak Aktif';
         userSessionStatus.className = isActive ? 'active-session' : 'inactive-session';
+        userSessionStatus.classList.add(isActive ? 'text-green-700' : '');
     });
 
     // Tangani tombol space untuk menjawab
@@ -141,6 +143,7 @@ if (document.querySelector('#userName')) {
     socket.on('fastestResponder', (responder) => {
         if (responder.name === userName) {
             responseResult.textContent = 'Anda yang pertama menjawab!';
+            responseResult.classList.remove("hidden");
         }
     });
 }

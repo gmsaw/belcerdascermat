@@ -6,25 +6,26 @@
     <title>User - Sistem Bel Cerdas Cermat</title>
     <link href="/styles.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 min-h-screen">
+<body class="bg-gray-100 min-h-screen flex justify-center items-center">
     <div class="container mx-auto px-4 py-8">
         <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 max-w-md mx-auto">
-            <h1 class="text-3xl font-bold text-center text-indigo-700 mb-6">Sistem Bel Cerdas Cermat</h1>
             
             <!-- Form Registrasi -->
-            <div id="registrationSection" class="mb-8">
+            <div id="registrationSection" class="mb-8 hi">
+                <h1 class="text-3xl font-bold text-center text-indigo-700 mb-6">Halo Calon Jawara UPC!</h1>
                 <div class="flex space-x-2 mb-4">
                     <input type="text" id="userName" placeholder="Masukkan nama Anda" 
-                        class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                     <button id="registerUser" 
-                        class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition">
-                        Daftar
-                    </button>
-                </div>
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition">
+                    Daftar
+                </button>
             </div>
-            
-            <!-- Response Section -->
-            <div id="responseSection" class="hidden">
+        </div>
+        
+        <!-- Response Section -->
+        <div id="responseSection" class="hidden">
+                <h1 class="text-3xl font-bold text-center text-indigo-700 mb-6">Selamat Bertanding!</h1>
                 <div class="bg-indigo-50 rounded-lg p-4 mb-6">
                     <p class="text-gray-600">Sesi saat ini: 
                         <span id="userSessionStatus" class="font-semibold">Tidak Aktif</span>
@@ -34,7 +35,7 @@
                 <div class="text-center mb-6">
                     <p class="text-gray-600 mb-3">Tekan <span class="font-bold bg-gray-200 px-2 py-1 rounded">SPACE</span> atau tombol di bawah untuk menjawab</p>
                     <button id="answerButton" 
-                        class="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg font-bold text-lg transition transform hover:scale-105">
+                        class="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg font-bold text-lg transition transform">
                         TEKAN UNTUK JAWAB
                     </button>
                 </div>
