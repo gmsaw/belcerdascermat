@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User - Sistem Bel Cerdas Cermat</title>
+    <title>Sistem Bel Cerdas Cermat</title>
+    <link rel="icon" href="/img/icon.png">
     <link href="/styles.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 min-h-screen flex justify-center items-center">
-    <div class="container mx-auto px-4 py-8">
-        <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 max-w-md mx-auto">
-            
+<body class="bg-[url('/img/bg.png')] bg-cover bg-center bg-no-repeat min-h-screen flex flex-col justify-center items-center">
+    <!-- Container utama dengan flex column -->
+    <div class="flex flex-col items-center w-full max-w-md px-4">
+        <!-- Gambar logo dengan ukuran responsive dan margin bawah -->
+        <img src="/img/logo.png" alt="logo" class="w-32 h-auto mb-8">
+        
+        <!-- Form container -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 w-full">
             <!-- Form Registrasi -->
-            <div id="registrationSection" class="mb-8 hi">
-                <h1 class="text-3xl font-bold text-center text-indigo-700 mb-6">Halo Calon Jawara UPC!</h1>
+            <div id="registrationSection" class="mb-8">
+                <h1 class="text-3xl font-bold text-center text-indigo-700 mb-6">Selamat Datang, Calon Jawara UPC!</h1>
                 <div class="flex space-x-2 mb-4">
                     <input type="text" id="userName" placeholder="Masukkan nama Anda" 
                     class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
